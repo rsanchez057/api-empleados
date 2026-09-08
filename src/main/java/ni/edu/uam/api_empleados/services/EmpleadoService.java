@@ -1,6 +1,8 @@
 package ni.edu.uam.api_empleados.services;
 
 import ni.edu.uam.api_empleados.dto.EmpleadoDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +27,19 @@ public class EmpleadoService {
     }
 
     public EmpleadoDTO guardar(EmpleadoDTO empleado) {
+        boolean existe = empleados.stream().anyMatch(e ->
+                e.getNombres().trim().equalsIgnoreCase(empleado.getNombres().trim()) &&
+                        e.getApellidos().trim().equalsIgnoreCase(empleado.getApellidos().trim()) &&
+                        e.getCargo().trim().equalsIgnoreCase(empleado.getCargo().trim())
+        );
+
+        if (existe) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Ya existe un empleado con los mismos nombres, apellidos y cargo"
+            );
+        }
+
         empleado.setId(secuencia.incrementAndGet());
         empleados.add(empleado);
         return empleado;

@@ -10,16 +10,6 @@ Almacenamiento en memoria (sin base de datos) para concentrarse en endpoints, DT
 
 Si usa otra versión de JDK, cambie `<java.version>` en el `pom.xml`.
 
-## Cómo abrirlo en IntelliJ IDEA
-
-1. Descomprima el archivo.
-2. **File → Open** y seleccione la carpeta `api-empleados` (no un archivo suelto).
-3. Espere a que Maven descargue las dependencias.
-4. Ejecute `ApiEmpleadosApplication`.
-
-Desde la terminal: `mvn spring-boot:run`
-
-La API queda en `http://localhost:8080/api/empleados`.
 
 ## Estructura de paquetes
 
